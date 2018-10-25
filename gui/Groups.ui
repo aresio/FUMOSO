@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>groupEditor</class>
+ <widget class="QDialog" name="groupEditor">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>601</width>
+    <height>302</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Groups editor</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="0">
+    <widget class="QPushButton" name="btn_rename">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Rename group</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Organize the variables of the Fuzzy System into groups.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QListWidget" name="listGroups"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="btn_new">
+     <property name="text">
+      <string>&amp;New group</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QListWidget" name="elementsListGroups">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="btn_remove">
+     <property name="text">
+      <string>&amp;Remove group</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="btn_selAll">
+     <property name="text">
+      <string>Select &amp;all</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="btn_selNone">
+     <property name="text">
+      <string>Select n&amp;one</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>addNewGroup()</slot>
+  <slot>updateGroupSublist()</slot>
+  <slot>updateRelations()</slot>
+  <slot>selectAllRelations()</slot>
+  <slot>selectNoneRelations()</slot>
+  <slot>removeGroup()</slot>
+ </slots>
+</ui>

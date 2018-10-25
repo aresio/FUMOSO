@@ -1,0 +1,910 @@
+FUNCTION_BLOCK deathcell
+
+	VAR_INPUT
+		Apoptosis:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		ATP:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Attach:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Autophagy:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Bcl2:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		BCN1:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		C1:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		CA2:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Caspase3:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		CHOP:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		DAPK:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		DeltaPsi:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		ERKPI3K:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Glucose:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Glycolysis:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		HBP:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		JNK:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Necrosis:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		NGlycos:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		PKA:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		RasGTP:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		ROS:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Src:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Survival:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		Time:	REAL;
+	END_VAR
+
+	VAR_INPUT
+		UPR:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		ApoptosisOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		ATPOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		AttachOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		AutophagyOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		Bcl2OUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		BCN1OUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		C1OUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		CA2OUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		Caspase3OUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		CHOPOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		DAPKOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		DeltaPsiOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		ERKPI3KOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		GlucoseOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		GlycolysisOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		HBPOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		JNKOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		NecrosisOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		NGlycosOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		ROSOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		SrcOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		SurvivalOUT:	REAL;
+	END_VAR
+
+	VAR_OUTPUT
+		UPROUT:	REAL;
+	END_VAR
+
+	FUZZIFY Apoptosis
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY ATP
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.4, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM VeryLow := (0.0, 0.0) (0.0, 1.0) (0.1, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.1, 1.0) (0.4, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Attach
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Autophagy
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Bcl2
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY BCN1
+		TERM High := (0.33, 0.0) (0.66, 1.0) (1.0, 0.0) ;
+		TERM VeryHigh := (0.66, 0.0) (1.0, 1.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.33, 1.0) (0.66, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.33, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY C1
+		TERM MoreFunctional := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM MediumFunctional := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM LessFunctional := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY CA2
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Caspase3
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY CHOP
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY DAPK
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY DeltaPsi
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY ERKPI3K
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Glucose
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.3, 1.0) (0.7, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Glycolysis
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY HBP
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY JNK
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Necrosis
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY NGlycos
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY PKA
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY RasGTP
+		TERM On := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Off := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY ROS
+		TERM High := (0.5, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.0, 0.0) (0.5, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.5, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Src
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Survival
+		TERM High := (0.0, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (1.0, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY Time
+		TERM High := (0.7, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.1, 0.0) (0.2, 1.0) (0.4, 1.0) (0.8, 0.0) ;
+		TERM AlmostHigh := (0.25, 0.0) (0.4, 1.0) (0.7, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.25, 0.0) ;
+	END_FUZZIFY 
+
+	FUZZIFY UPR
+		TERM High := (0.6, 0.0) (1.0, 1.0) (1.0, 0.0) ;
+		TERM Medium := (0.2, 0.0) (0.6, 1.0) (1.0, 0.0) ;
+		TERM Low := (0.0, 0.0) (0.0, 1.0) (0.2, 1.0) (0.6, 0.0) ;
+	END_FUZZIFY 
+
+	DEFUZZIFY ApoptosisOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY ATPOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM VeryLow :=0.0 ;
+		TERM Low :=0.1 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY AttachOUT
+		TERM High :=1.0 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY AutophagyOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY Bcl2OUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY BCN1OUT
+		TERM High :=0.66 ;
+		TERM VeryHigh :=1.0 ;
+		TERM Medium :=0.33 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY C1OUT
+		TERM MoreFunctional :=1.0 ;
+		TERM MediumFunctional :=0.5 ;
+		TERM LessFunctional :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY CA2OUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY Caspase3OUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY CHOPOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY DAPKOUT
+		TERM High :=1.0 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY DeltaPsiOUT
+		TERM High :=1.0 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY ERKPI3KOUT
+		TERM High :=1.0 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY GlucoseOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.1 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY GlycolysisOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY HBPOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY JNKOUT
+		TERM High :=1.0 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY NecrosisOUT
+		TERM High :=1.0 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY NGlycosOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY ROSOUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY SrcOUT
+		TERM High :=1.0 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY SurvivalOUT
+		TERM High :=1.0 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	DEFUZZIFY UPROUT
+		TERM High :=1.0 ;
+		TERM Medium :=0.5 ;
+		TERM Low :=0.0 ;
+		ACCU : MAX;
+		METHOD : COGS;
+		DEFAULT := 1.0;
+	END_DEFUZZIFY 
+
+	RULEBLOCK Attach_rules
+		RULE 0: IF NGlycos IS High THEN AttachOUT IS High;
+		RULE 1: IF NGlycos IS Medium THEN AttachOUT IS Low;
+		RULE 2: IF NGlycos IS Low THEN AttachOUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK ATP_rules
+		RULE 0: IF (Glycolysis IS Low AND C1 IS LessFunctional) THEN ATPOUT IS VeryLow;
+		RULE 1: IF (Glycolysis IS Low AND C1 IS MediumFunctional) THEN ATPOUT IS Medium;
+		RULE 2: IF (Glycolysis IS Medium AND C1 IS LessFunctional) THEN ATPOUT IS Medium;
+		RULE 3: IF (Glycolysis IS Low AND DeltaPsi IS Low) THEN ATPOUT IS Medium;
+		RULE 4: IF (Glycolysis IS Medium AND C1 IS MediumFunctional) THEN ATPOUT IS Medium;
+		RULE 5: IF DeltaPsi IS High THEN ATPOUT IS High;
+		RULE 6: IF Glycolysis IS High THEN ATPOUT IS High;
+		RULE 7: IF Glycolysis IS Medium THEN ATPOUT IS Medium;
+		RULE 8: IF Glycolysis IS Low THEN ATPOUT IS Low;
+		RULE 9: IF C1 IS MoreFunctional THEN ATPOUT IS High;
+		RULE 10: IF (Glycolysis IS High AND DeltaPsi IS Low) THEN ATPOUT IS High;
+		RULE 11: IF (Glycolysis IS High AND C1 IS LessFunctional) THEN ATPOUT IS High;
+		RULE 12: IF (Glycolysis IS High AND C1 IS MediumFunctional) THEN ATPOUT IS High;
+		RULE 13: IF (Glycolysis IS Medium AND DeltaPsi IS Low) THEN ATPOUT IS Medium;
+	END_RULEBLOCK 
+
+	RULEBLOCK HBP_rules
+		RULE 0: IF (Glucose IS Medium AND Autophagy IS Low) THEN HBPOUT IS Medium;
+		RULE 1: IF (Glucose IS High AND Autophagy IS High) THEN HBPOUT IS High;
+		RULE 2: IF (Glucose IS High AND Autophagy IS Medium) THEN HBPOUT IS High;
+		RULE 3: IF (Glucose IS High AND Autophagy IS Low) THEN HBPOUT IS High;
+		RULE 4: IF (Glucose IS Low AND Autophagy IS Medium) THEN HBPOUT IS Medium;
+		RULE 5: IF (Glucose IS Low AND Autophagy IS Low) THEN HBPOUT IS Low;
+		RULE 6: IF (Glucose IS Medium AND Autophagy IS High) THEN HBPOUT IS High;
+		RULE 7: IF (Glucose IS Medium AND Autophagy IS Medium) THEN HBPOUT IS Medium;
+		RULE 8: IF (Glucose IS Low AND Autophagy IS High) THEN HBPOUT IS High;
+	END_RULEBLOCK 
+
+	RULEBLOCK NGlycos_rules
+		RULE 0: IF ATP IS Medium THEN NGlycosOUT IS High;
+		RULE 1: IF ATP IS Low THEN NGlycosOUT IS Medium;
+		RULE 2: IF ATP IS High THEN NGlycosOUT IS High;
+		RULE 3: IF ATP IS VeryLow THEN NGlycosOUT IS Low;
+		RULE 4: IF HBP IS High THEN NGlycosOUT IS High;
+		RULE 5: IF HBP IS Medium THEN NGlycosOUT IS Medium;
+		RULE 6: IF HBP IS Low THEN NGlycosOUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK Glucose_rules
+		RULE 0: IF Time IS Medium THEN GlucoseOUT IS Medium;
+		RULE 1: IF Time IS Low THEN GlucoseOUT IS High;
+		RULE 2: IF Time IS High THEN GlucoseOUT IS Low;
+		RULE 3: IF Time IS AlmostHigh THEN GlucoseOUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK Glycolysis_rules
+		RULE 0: IF Glucose IS Low THEN GlycolysisOUT IS Low;
+		RULE 1: IF Glucose IS Medium THEN GlycolysisOUT IS Medium;
+		RULE 2: IF Glucose IS High THEN GlycolysisOUT IS High;
+	END_RULEBLOCK 
+
+	RULEBLOCK Apoptosis_rules
+		RULE 0: IF Caspase3 IS Medium THEN ApoptosisOUT IS Medium;
+		RULE 1: IF Caspase3 IS Low THEN ApoptosisOUT IS Low;
+		RULE 2: IF Caspase3 IS High THEN ApoptosisOUT IS High;
+	END_RULEBLOCK 
+
+	RULEBLOCK DAPK_rules
+		RULE 0: IF Src IS Low THEN DAPKOUT IS High;
+		RULE 1: IF ERKPI3K IS High THEN DAPKOUT IS Low;
+		RULE 2: IF CA2 IS Low THEN DAPKOUT IS Low;
+		RULE 3: IF CA2 IS High THEN DAPKOUT IS High;
+		RULE 4: IF CA2 IS Medium THEN DAPKOUT IS High;
+		RULE 5: IF ERKPI3K IS Low THEN DAPKOUT IS High;
+		RULE 6: IF Src IS High THEN DAPKOUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK CHOP_rules
+		RULE 0: IF UPR IS High THEN CHOPOUT IS High;
+		RULE 1: IF UPR IS Low THEN CHOPOUT IS Low;
+		RULE 2: IF UPR IS Medium THEN CHOPOUT IS Medium;
+	END_RULEBLOCK 
+
+	RULEBLOCK C1_rules
+		RULE 0: IF (Glycolysis IS High AND PKA IS High) THEN C1OUT IS MoreFunctional;
+		RULE 1: IF PKA IS Low THEN C1OUT IS MediumFunctional;
+		RULE 2: IF (Glycolysis IS Medium AND PKA IS High) THEN C1OUT IS MoreFunctional;
+		RULE 3: IF (Glycolysis IS High AND PKA IS Low) THEN C1OUT IS MediumFunctional;
+		RULE 4: IF (Glycolysis IS Medium AND PKA IS Low) THEN C1OUT IS MediumFunctional;
+		RULE 5: IF (Glycolysis IS Low AND PKA IS High) THEN C1OUT IS MoreFunctional;
+		RULE 6: IF (Glycolysis IS Low AND PKA IS Low) THEN C1OUT IS LessFunctional;
+	END_RULEBLOCK 
+
+	RULEBLOCK ROS_rules
+		RULE 0: IF C1 IS MediumFunctional THEN ROSOUT IS Medium;
+		RULE 1: IF C1 IS LessFunctional THEN ROSOUT IS High;
+		RULE 2: IF DeltaPsi IS Low THEN ROSOUT IS High;
+		RULE 3: IF C1 IS MoreFunctional THEN ROSOUT IS Low;
+		RULE 4: IF DeltaPsi IS High THEN ROSOUT IS Medium;
+	END_RULEBLOCK 
+
+	RULEBLOCK Bcl2_rules
+		RULE 0: IF ATP IS VeryLow THEN Bcl2OUT IS Low;
+		RULE 1: IF BCN1 IS High THEN Bcl2OUT IS Low;
+		RULE 2: IF (CHOP IS High AND JNK IS High) THEN Bcl2OUT IS Low;
+		RULE 3: IF (CHOP IS Low AND JNK IS High) THEN Bcl2OUT IS Low;
+		RULE 4: IF ATP IS High THEN Bcl2OUT IS High;
+		RULE 5: IF CHOP IS Medium THEN Bcl2OUT IS Medium;
+		RULE 6: IF (CHOP IS Medium AND JNK IS High) THEN Bcl2OUT IS Low;
+		RULE 7: IF ATP IS Low THEN Bcl2OUT IS Low;
+		RULE 8: IF ATP IS Medium THEN Bcl2OUT IS High;
+		RULE 9: IF CHOP IS High THEN Bcl2OUT IS Low;
+		RULE 10: IF CHOP IS Low THEN Bcl2OUT IS High;
+		RULE 11: IF BCN1 IS VeryHigh THEN Bcl2OUT IS Low;
+		RULE 12: IF BCN1 IS Medium THEN Bcl2OUT IS Medium;
+		RULE 13: IF PKA IS Low THEN Bcl2OUT IS High;
+		RULE 14: IF JNK IS Low THEN Bcl2OUT IS High;
+		RULE 15: IF PKA IS High THEN Bcl2OUT IS Medium;
+		RULE 16: IF (CHOP IS Medium AND JNK IS Low) THEN Bcl2OUT IS Medium;
+		RULE 17: IF BCN1 IS Low THEN Bcl2OUT IS High;
+	END_RULEBLOCK 
+
+	RULEBLOCK Src_rules
+		RULE 0: IF (PKA IS High AND Attach IS Low) THEN SrcOUT IS High;
+		RULE 1: IF Attach IS High THEN SrcOUT IS High;
+		RULE 2: IF PKA IS High THEN SrcOUT IS High;
+		RULE 3: IF PKA IS Low THEN SrcOUT IS Low;
+		RULE 4: IF Attach IS Low THEN SrcOUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK DeltaPsi_rules
+		RULE 0: IF (CA2 IS Medium AND Glycolysis IS Medium) THEN DeltaPsiOUT IS Low;
+		RULE 1: IF Bcl2 IS Medium THEN DeltaPsiOUT IS Low;
+		RULE 2: IF (CA2 IS High AND Glycolysis IS Low) THEN DeltaPsiOUT IS Low;
+		RULE 3: IF (CA2 IS Medium AND Glycolysis IS High) THEN DeltaPsiOUT IS High;
+		RULE 4: IF (Bcl2 IS Low AND Glycolysis IS Medium) THEN DeltaPsiOUT IS Low;
+		RULE 5: IF (Bcl2 IS Low AND Glycolysis IS Low) THEN DeltaPsiOUT IS Low;
+		RULE 6: IF CA2 IS Low THEN DeltaPsiOUT IS High;
+		RULE 7: IF Bcl2 IS High THEN DeltaPsiOUT IS High;
+		RULE 8: IF (C1 IS LessFunctional AND Glycolysis IS Medium) THEN DeltaPsiOUT IS Low;
+		RULE 9: IF (Bcl2 IS Low AND Glycolysis IS High) THEN DeltaPsiOUT IS High;
+		RULE 10: IF (CA2 IS High AND Glycolysis IS Medium) THEN DeltaPsiOUT IS Low;
+		RULE 11: IF C1 IS MediumFunctional THEN DeltaPsiOUT IS High;
+		RULE 12: IF (C1 IS LessFunctional AND Glycolysis IS High) THEN DeltaPsiOUT IS High;
+		RULE 13: IF Glycolysis IS Medium THEN DeltaPsiOUT IS High;
+		RULE 14: IF C1 IS MoreFunctional THEN DeltaPsiOUT IS High;
+		RULE 15: IF Glycolysis IS High THEN DeltaPsiOUT IS High;
+		RULE 16: IF Glycolysis IS Low THEN DeltaPsiOUT IS Low;
+		RULE 17: IF (C1 IS LessFunctional AND Glycolysis IS Low) THEN DeltaPsiOUT IS Low;
+		RULE 18: IF (CA2 IS High AND Glycolysis IS High) THEN DeltaPsiOUT IS High;
+		RULE 19: IF (CA2 IS Medium AND Glycolysis IS Low) THEN DeltaPsiOUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK Caspase3_rules
+		RULE 0: IF (CA2 IS High AND ATP IS Medium) THEN Caspase3OUT IS High;
+		RULE 1: IF ROS IS Low THEN Caspase3OUT IS Low;
+		RULE 2: IF (Bcl2 IS Medium AND ATP IS VeryLow) THEN Caspase3OUT IS Low;
+		RULE 3: IF ATP IS VeryLow THEN Caspase3OUT IS Low;
+		RULE 4: IF (Bcl2 IS Low AND ATP IS VeryLow) THEN Caspase3OUT IS Low;
+		RULE 5: IF (DeltaPsi IS Low AND ATP IS VeryLow) THEN Caspase3OUT IS Low;
+		RULE 6: IF (DeltaPsi IS Low AND ATP IS Low) THEN Caspase3OUT IS High;
+		RULE 7: IF (Bcl2 IS Low AND ATP IS Medium) THEN Caspase3OUT IS High;
+		RULE 8: IF ATP IS Medium THEN Caspase3OUT IS Low;
+		RULE 9: IF (Bcl2 IS Medium AND ATP IS High) THEN Caspase3OUT IS Medium;
+		RULE 10: IF (DeltaPsi IS Low AND ATP IS Medium) THEN Caspase3OUT IS High;
+		RULE 11: IF (ROS IS High AND ATP IS High) THEN Caspase3OUT IS High;
+		RULE 12: IF (Bcl2 IS Low AND ATP IS High) THEN Caspase3OUT IS High;
+		RULE 13: IF (DeltaPsi IS Low AND ATP IS High) THEN Caspase3OUT IS High;
+		RULE 14: IF ERKPI3K IS Low THEN Caspase3OUT IS Medium;
+		RULE 15: IF (CA2 IS High AND ATP IS High) THEN Caspase3OUT IS High;
+		RULE 16: IF (ROS IS High AND ATP IS Low) THEN Caspase3OUT IS High;
+		RULE 17: IF (ROS IS High AND ATP IS Medium) THEN Caspase3OUT IS High;
+		RULE 18: IF Bcl2 IS High THEN Caspase3OUT IS Low;
+		RULE 19: IF DeltaPsi IS High THEN Caspase3OUT IS Low;
+		RULE 20: IF ERKPI3K IS High THEN Caspase3OUT IS Low;
+		RULE 21: IF (ROS IS High AND ATP IS VeryLow) THEN Caspase3OUT IS Low;
+		RULE 22: IF (Bcl2 IS Medium AND ATP IS Medium) THEN Caspase3OUT IS Medium;
+		RULE 23: IF (Bcl2 IS Medium AND ATP IS Low) THEN Caspase3OUT IS Medium;
+		RULE 24: IF ATP IS Low THEN Caspase3OUT IS High;
+		RULE 25: IF (Bcl2 IS Low AND ATP IS Low) THEN Caspase3OUT IS High;
+		RULE 26: IF ROS IS Medium THEN Caspase3OUT IS Low;
+		RULE 27: IF CA2 IS Medium THEN Caspase3OUT IS Low;
+		RULE 28: IF (CA2 IS High AND ATP IS VeryLow) THEN Caspase3OUT IS Low;
+		RULE 29: IF ATP IS High THEN Caspase3OUT IS Low;
+		RULE 30: IF (CA2 IS High AND ATP IS Low) THEN Caspase3OUT IS High;
+		RULE 31: IF CA2 IS Low THEN Caspase3OUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK Necrosis_rules
+		RULE 0: IF (Bcl2 IS Low AND ATP IS VeryLow) THEN NecrosisOUT IS High;
+		RULE 1: IF ROS IS Medium THEN NecrosisOUT IS Low;
+		RULE 2: IF Bcl2 IS High THEN NecrosisOUT IS Low;
+		RULE 3: IF (ROS IS High AND ATP IS High) THEN NecrosisOUT IS Low;
+		RULE 4: IF Bcl2 IS Medium THEN NecrosisOUT IS Low;
+		RULE 5: IF ROS IS Low THEN NecrosisOUT IS Low;
+		RULE 6: IF ATP IS Medium THEN NecrosisOUT IS Low;
+		RULE 7: IF (ROS IS High AND ATP IS VeryLow) THEN NecrosisOUT IS High;
+		RULE 8: IF (Bcl2 IS Low AND ATP IS High) THEN NecrosisOUT IS Low;
+		RULE 9: IF (Bcl2 IS Low AND ATP IS Medium) THEN NecrosisOUT IS High;
+		RULE 10: IF (ROS IS High AND ATP IS Low) THEN NecrosisOUT IS High;
+		RULE 11: IF ATP IS Low THEN NecrosisOUT IS Low;
+		RULE 12: IF (ROS IS High AND ATP IS Medium) THEN NecrosisOUT IS High;
+		RULE 13: IF ATP IS VeryLow THEN NecrosisOUT IS High;
+		RULE 14: IF (Bcl2 IS Low AND ATP IS Low) THEN NecrosisOUT IS High;
+		RULE 15: IF ATP IS High THEN NecrosisOUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK ERKPI3K_rules
+		RULE 0: IF (RasGTP IS Off AND DAPK IS Low) THEN ERKPI3KOUT IS High;
+		RULE 1: IF (RasGTP IS Off AND Src IS High) THEN ERKPI3KOUT IS High;
+		RULE 2: IF (Src IS Low AND RasGTP IS Off) THEN ERKPI3KOUT IS Low;
+		RULE 3: IF Src IS High THEN ERKPI3KOUT IS High;
+		RULE 4: IF DAPK IS Low THEN ERKPI3KOUT IS High;
+		RULE 5: IF (DAPK IS High AND RasGTP IS On) THEN ERKPI3KOUT IS High;
+		RULE 6: IF (DAPK IS High AND RasGTP IS Off) THEN ERKPI3KOUT IS Low;
+		RULE 7: IF (Src IS Low AND RasGTP IS On) THEN ERKPI3KOUT IS High;
+		RULE 8: IF RasGTP IS On THEN ERKPI3KOUT IS High;
+	END_RULEBLOCK 
+
+	RULEBLOCK UPR_rules
+		RULE 0: IF ATP IS Medium THEN UPROUT IS Low;
+		RULE 1: IF NGlycos IS Low THEN UPROUT IS High;
+		RULE 2: IF ATP IS VeryLow THEN UPROUT IS High;
+		RULE 3: IF NGlycos IS High THEN UPROUT IS Low;
+		RULE 4: IF ATP IS Low THEN UPROUT IS Medium;
+		RULE 5: IF NGlycos IS Medium THEN UPROUT IS Medium;
+		RULE 6: IF ATP IS High THEN UPROUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK CA2_rules
+		RULE 0: IF UPR IS High THEN CA2OUT IS High;
+		RULE 1: IF UPR IS Medium THEN CA2OUT IS Medium;
+		RULE 2: IF UPR IS Low THEN CA2OUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK Autophagy_rules
+		RULE 0: IF (Glycolysis IS High AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 1: IF (BCN1 IS Medium AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 2: IF (CA2 IS Medium AND PKA IS Low) THEN AutophagyOUT IS Medium;
+		RULE 3: IF (PKA IS High AND ATP IS Low) THEN AutophagyOUT IS High;
+		RULE 4: IF (ATP IS Medium AND PKA IS Low) THEN AutophagyOUT IS Low;
+		RULE 5: IF (BCN1 IS Medium AND PKA IS Low) THEN AutophagyOUT IS Medium;
+		RULE 6: IF (CA2 IS Low AND PKA IS Low) THEN AutophagyOUT IS Low;
+		RULE 7: IF (BCN1 IS Medium AND (PKA IS Low AND ATP IS VeryLow)) THEN AutophagyOUT IS Medium;
+		RULE 8: IF BCN1 IS High THEN AutophagyOUT IS High;
+		RULE 9: IF (CA2 IS Medium AND (PKA IS Low AND ATP IS Low)) THEN AutophagyOUT IS High;
+		RULE 10: IF (BCN1 IS Medium AND (PKA IS Low AND ATP IS Low)) THEN AutophagyOUT IS High;
+		RULE 11: IF (CA2 IS Low AND (PKA IS Low AND ATP IS Low)) THEN AutophagyOUT IS High;
+		RULE 12: IF ROS IS High THEN AutophagyOUT IS High;
+		RULE 13: IF (CA2 IS Medium AND (PKA IS Low AND ATP IS VeryLow)) THEN AutophagyOUT IS Medium;
+		RULE 14: IF (CA2 IS Medium AND (PKA IS Low AND ATP IS High)) THEN AutophagyOUT IS Medium;
+		RULE 15: IF (PKA IS Low AND Glycolysis IS Low) THEN AutophagyOUT IS High;
+		RULE 16: IF (ATP IS High AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 17: IF (ROS IS Low AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 18: IF (BCN1 IS Medium AND (PKA IS Low AND ATP IS Medium)) THEN AutophagyOUT IS Medium;
+		RULE 19: IF (Glycolysis IS High AND (PKA IS Low AND ATP IS Low)) THEN AutophagyOUT IS High;
+		RULE 20: IF (Glycolysis IS High AND PKA IS Low) THEN AutophagyOUT IS Low;
+		RULE 21: IF (Glycolysis IS Medium AND (PKA IS Low AND ATP IS High)) THEN AutophagyOUT IS Medium;
+		RULE 22: IF (CA2 IS Low AND (PKA IS Low AND ATP IS Medium)) THEN AutophagyOUT IS Low;
+		RULE 23: IF (ATP IS Medium AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 24: IF (ATP IS VeryLow AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 25: IF (Glycolysis IS Medium AND PKA IS Low) THEN AutophagyOUT IS Medium;
+		RULE 26: IF (Glycolysis IS Medium AND (PKA IS Low AND ATP IS VeryLow)) THEN AutophagyOUT IS Medium;
+		RULE 27: IF (Glycolysis IS Medium AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 28: IF (BCN1 IS Low AND (PKA IS Low AND ATP IS Low)) THEN AutophagyOUT IS High;
+		RULE 29: IF (Glycolysis IS Medium AND (PKA IS Low AND ATP IS Medium)) THEN AutophagyOUT IS Medium;
+		RULE 30: IF Glycolysis IS Low THEN AutophagyOUT IS High;
+		RULE 31: IF (BCN1 IS Low AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 32: IF (BCN1 IS Low AND (PKA IS Low AND ATP IS VeryLow)) THEN AutophagyOUT IS Low;
+		RULE 33: IF (Glycolysis IS High AND (PKA IS Low AND ATP IS Medium)) THEN AutophagyOUT IS Low;
+		RULE 34: IF (Glycolysis IS High AND (PKA IS Low AND ATP IS VeryLow)) THEN AutophagyOUT IS Low;
+		RULE 35: IF (ATP IS High AND PKA IS Low) THEN AutophagyOUT IS Low;
+		RULE 36: IF CA2 IS High THEN AutophagyOUT IS High;
+		RULE 37: IF BCN1 IS VeryHigh THEN AutophagyOUT IS High;
+		RULE 38: IF (BCN1 IS Low AND (PKA IS Low AND ATP IS High)) THEN AutophagyOUT IS Low;
+		RULE 39: IF (ATP IS VeryLow AND PKA IS Low) THEN AutophagyOUT IS Low;
+		RULE 40: IF (CA2 IS Low AND (PKA IS Low AND ATP IS VeryLow)) THEN AutophagyOUT IS Low;
+		RULE 41: IF (PKA IS Low AND CA2 IS High) THEN AutophagyOUT IS High;
+		RULE 42: IF (CA2 IS Medium AND (PKA IS Low AND ATP IS Medium)) THEN AutophagyOUT IS Medium;
+		RULE 43: IF (Glycolysis IS Medium AND (PKA IS Low AND ATP IS Low)) THEN AutophagyOUT IS High;
+		RULE 44: IF (Glycolysis IS High AND (PKA IS Low AND ATP IS High)) THEN AutophagyOUT IS Low;
+		RULE 45: IF (CA2 IS Medium AND PKA IS High) THEN AutophagyOUT IS High;
+		RULE 46: IF (BCN1 IS Medium AND (PKA IS Low AND ATP IS High)) THEN AutophagyOUT IS Medium;
+		RULE 47: IF (ROS IS Medium AND PKA IS High) THEN AutophagyOUT IS Medium;
+		RULE 48: IF (ROS IS Low AND PKA IS Low) THEN AutophagyOUT IS Low;
+		RULE 49: IF PKA IS High THEN AutophagyOUT IS High;
+		RULE 50: IF (ROS IS Medium AND PKA IS Low) THEN AutophagyOUT IS Low;
+		RULE 51: IF (BCN1 IS Low AND PKA IS Low) THEN AutophagyOUT IS Low;
+		RULE 52: IF (PKA IS Low AND ATP IS Low) THEN AutophagyOUT IS Medium;
+		RULE 53: IF (CA2 IS Low AND (PKA IS Low AND ATP IS High)) THEN AutophagyOUT IS Low;
+		RULE 54: IF (PKA IS Low AND BCN1 IS High) THEN AutophagyOUT IS High;
+		RULE 55: IF (BCN1 IS Low AND (PKA IS Low AND ATP IS Medium)) THEN AutophagyOUT IS Low;
+		RULE 56: IF (CA2 IS Low AND PKA IS High) THEN AutophagyOUT IS High;
+	END_RULEBLOCK 
+
+	RULEBLOCK BCN1_rules
+		RULE 0: IF Bcl2 IS Low THEN BCN1OUT IS High;
+		RULE 1: IF Bcl2 IS High THEN BCN1OUT IS Low;
+		RULE 2: IF Bcl2 IS Medium THEN BCN1OUT IS Medium;
+		RULE 3: IF DAPK IS High THEN BCN1OUT IS VeryHigh;
+		RULE 4: IF DAPK IS Low THEN BCN1OUT IS Low;
+	END_RULEBLOCK 
+
+	RULEBLOCK JNK_rules
+		RULE 0: IF UPR IS Low THEN JNKOUT IS Low;
+		RULE 1: IF UPR IS High THEN JNKOUT IS High;
+		RULE 2: IF UPR IS Medium THEN JNKOUT IS High;
+	END_RULEBLOCK 
+
+	RULEBLOCK Survival_rules
+		RULE 0: IF Caspase3 IS High THEN SurvivalOUT IS Low;
+		RULE 1: IF Autophagy IS Medium THEN SurvivalOUT IS High;
+		RULE 2: IF Autophagy IS High THEN SurvivalOUT IS High;
+		RULE 3: IF ATP IS Low THEN SurvivalOUT IS Low;
+		RULE 4: IF Caspase3 IS Medium THEN SurvivalOUT IS Low;
+		RULE 5: IF DeltaPsi IS High THEN SurvivalOUT IS High;
+		RULE 6: IF DeltaPsi IS Low THEN SurvivalOUT IS Low;
+		RULE 7: IF ATP IS High THEN SurvivalOUT IS High;
+		RULE 8: IF ATP IS VeryLow THEN SurvivalOUT IS Low;
+		RULE 9: IF Autophagy IS Low THEN SurvivalOUT IS Low;
+		RULE 10: IF ATP IS Medium THEN SurvivalOUT IS High;
+		RULE 11: IF Caspase3 IS Low THEN SurvivalOUT IS High;
+	END_RULEBLOCK 
+
+END_FUNCTION_BLOCK
+# FCL file
+../celde13.fcl
+# groups observed
+All	['Apoptosis', 'ATP', 'Attach', 'Autophagy', 'Bcl2', 'BCN1', 'C1', 'CA2', 'Caspase3', 'CHOP', 'DAPK', 'DeltaPsi', 'ERKPI3K', 'Glucose', 'Glycolysis', 'HBP', 'JNK', 'Necrosis', 'NGlycos', 'PKA', 'RasGTP', 'ROS', 'Src', 'Survival', 'UPR']
+Group5	['Attach', 'Caspase3', 'ERKPI3K', 'Glucose', 'RasGTP', 'Src']
+Group4	['BCN1', 'CA2', 'DAPK', 'Glucose', 'HBP', 'NGlycos', 'UPR']
+BNC1-autofagia	['Autophagy', 'Bcl2', 'BCN1', 'DAPK']
+Group3	['Bcl2', 'CHOP', 'Glucose', 'HBP', 'JNK', 'NGlycos', 'UPR']
+Test	['PKA', 'RasGTP']
+Output	['Apoptosis', 'Attach', 'Autophagy', 'Glucose', 'Necrosis', 'Survival']
+Metabolism	['ATP', 'BCN1', 'C1', 'Caspase3', 'DeltaPsi', 'Glucose', 'Glycolysis', 'PKA', 'ROS']
+# initial states
+Apoptosis	0.0			0.0	1.0
+ATP	1.0			0.0	1.0
+Attach	1.0			0.0	1.0
+Autophagy	0.0			0.0	1.0
+Bcl2	1.0			0.0	1.0
+BCN1	0.0			0.0	1.0
+C1	0.5			0.0	1.0
+CA2	0.0			0.0	1.0
+Caspase3	0.0			0.0	1.0
+CHOP	0.0			0.0	1.0
+DAPK	0.0			0.0	1.0
+DeltaPsi	1.0			0.0	1.0
+ERKPI3K	1.0			0.0	1.0
+Glucose	1.0	1.0 if time<0.075 else 0.0 if time > 0.7 else 1.0/(7*time**.75)-.185		0.0	1.0
+Glycolysis	1.0			0.0	1.0
+HBP	1.0			0.0	1.0
+JNK	0.0			0.0	1.0
+Necrosis	0.0			0.0	1.0
+NGlycos	1.0			0.0	1.0
+PKA	1.0	0.0		0.0	1.0
+RasGTP	1.0	1.0		0.0	1.0
+ROS	0.5			0.0	1.0
+Src	1.0			0.0	1.0
+Survival	1.0			0.0	1.0
+Time	0.0			0.0	1.0
+UPR	0.0			0.0	1.0
+# simulation data
+timemax	1.0	iterations	100
